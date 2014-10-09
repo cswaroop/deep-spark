@@ -124,17 +124,16 @@ Once your VM is up and running you can test Deep using the shell. Enter /opt/sds
 <p>You already have a working Cassandra server on your development machine: you need a spark+deep bundle, we suggest to create one by running:</p>
 
 <pre>
-cd deep-scripts
+    cd deep-scripts
 
-./make-distribution-deep.sh
+    ./make-distribution-deep.sh
 </pre>
-</li>
-</ul>
+
 <p>this will build a Spark distribution package with StratioDeep and Cassandra's jars included (depending on your machine this script could take a while, since it will compile Spark from sources).
 The package will be called <code>spark-deep-distribution-X.Y.Z.tgz</code>, untar it to a folder of your choice, enter that folder and issue a <code>./stratio-deep-shell</code>, this will start an interactive shell where you can test StratioDeep (you may have noticed this is will start a development cluster started with MASTER="local").</p>
-
-<ul>
-<li>You already have a working installation os Cassandra and Spark on your development machine: this is the most difficult way to start testing Deep, but you know what you're doing you will have to
+</li>
+<li>
+<p>You already have a working installation os Cassandra and Spark on your development machine: this is the most difficult way to start testing Deep, but you know what you're doing you will have to</p>
 
 <ol>
 <li>copy the Stratio Deep jars to Spark's 'jars' folder (<code>$SPARK_HOME/jars</code>).</li>
@@ -142,10 +141,10 @@ The package will be called <code>spark-deep-distribution-X.Y.Z.tgz</code>, untar
 <li>copy Datastax Java Driver jar (v 2.0.x) to Spark's 'jar' folder.</li>
 <li>start spark shell and import the following:
 <pre>
-import com.stratio.deep.config._
-import com.stratio.deep.entity._
-import com.stratio.deep.context._
-import com.stratideep.rdd._
+    import com.stratio.deep.config._
+    import com.stratio.deep.entity._
+    import com.stratio.deep.context._
+    import com.stratideep.rdd._
 </pre>
 <br>
 </li>
