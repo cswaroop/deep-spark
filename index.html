@@ -45,8 +45,8 @@
 We provide two different interfaces:</p>
 
 <ul>
-<li>The first one will let developers map Cassandra tables to plain old java objects (POJOs), just like if you were using any other ORM. We call this API the 'entity objects' API. This abstraction is quite handy, it will let you work on RDD (under the hood Deep will transparently map Cassandra's columns to entity properties). Your domain entities must be correctly annotated using Deep annotations (take a look at deep-examples example entities in package com.stratio.deep.testentity).</li>
-<li>The second one is a more generic 'cell' API, that will let developerss work on RDD where a 'Cells' object is a collection of com.stratio.deep.entity.Cell objects. Column metadata is automatically fetched from the data store. This interface is a little bit more cumbersome to work with (see the example below), but has the advantage that it doesn't require the definition of additional entity classes. Example: you have a table called 'users' and you decide to use the 'Cells' interface. Once you get an instance 'c' of the Cells object, to get the value of column 'address' you can issue a c.getCellByName("address").getCellValue(). Please, refer to the Deep API documentation to know more about the Cells and Cell objects.</li>
+<li><p>The first one will let developers map Cassandra tables to plain old java objects (POJOs), just like if you were using any other ORM. We call this API the 'entity objects' API. This abstraction is quite handy, it will let you work on RDD (under the hood Deep will transparently map Cassandra's columns to entity properties). Your domain entities must be correctly annotated using Deep annotations (take a look at deep-examples example entities in package com.stratio.deep.testentity).</p></li>
+<li><p>The second one is a more generic 'cell' API, that will let developerss work on RDD where a 'Cells' object is a collection of com.stratio.deep.entity.Cell objects. Column metadata is automatically fetched from the data store. This interface is a little bit more cumbersome to work with (see the example below), but has the advantage that it doesn't require the definition of additional entity classes. Example: you have a table called 'users' and you decide to use the 'Cells' interface. Once you get an instance 'c' of the Cells object, to get the value of column 'address' you can issue a c.getCellByName("address").getCellValue(). Please, refer to the Deep API documentation to know more about the Cells and Cell objects.</p></li>
 </ul><p>We encourage you to read the more comprehensive documentation hosted on the <a href="http://docs.openstratio.org/deep/">Openstratio website</a>.</p>
 
 <p>Deep comes with an example sub project called 'deep-examples' containing a set of working examples, both in Java and Scala.
@@ -105,8 +105,7 @@ Please, refer to the deep-example project README for further information on how 
 <li>Clone the project</li>
 <li>To configure a development environment in Eclipse: import as Maven project. In IntelliJ: open the project by selecting the deep-parent POM file</li>
 <li>Install the project in you local maven repository. Enter deep-parent subproject and perform: mvn clean install (add -DskipTests to skip tests)</li>
-<li>
-<p>Put Deep to work on a working cassandra + spark cluster. You have several options:</p>
+<li>Put Deep to work on a working cassandra + spark cluster. You have several options:
 
 <ul>
 <li>Download a pre-configured Stratio platform VM <a href="http://www.stratio.com/">Stratio's BigData platform</a>. This VM will work on both Virtualbox and VMWare, and comes with a fully configured distribution that also includes Stratio Deep. We also distribute the VM with several preloaded datasets in Cassandra. This distribution will include Stratio's customized Cassandra distribution containing our powerful [open-source lucene-based secondary indexes (<a href="https://github.com/Stratio/stratio-cassandra">https://github.com/Stratio/stratio-cassandra</a>), see Stratio documentation for further information. Once your VM is up and running you can test Deep using the shell. Enter /opt/sds and run bin/stratio-deep-shell.</li>
