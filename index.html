@@ -118,13 +118,12 @@ Please, refer to the deep-example project README for further information on how 
     cd deep-scripts
 
     ./make-distribution-deep.sh
-</pre>
+</pre>      
 
 <p>this will build a Spark distribution package with StratioDeep and Cassandra's jars included (depending on your machine this script could take a while, since it will compile Spark from sources).
 The package will be called <code>spark-deep-distribution-X.Y.Z.tgz</code>, untar it to a folder of your choice, enter that folder and issue a <code>./stratio-deep-shell</code>, this will start an interactive shell where you can test StratioDeep (you may have noticed this is will start a development cluster started with MASTER="local").</p>
 </li>
-<li>
-<p>You already have a working installation os Cassandra and Spark on your development machine: this is the most difficult way to start testing Deep, but you know what you're doing you will have to</p>
+<li>You already have a working installation os Cassandra and Spark on your development machine: this is the most difficult way to start testing Deep, but you know what you're doing you will have to
 
 <ol>
 <li>copy the Stratio Deep jars to Spark's 'jars' folder (<code>$SPARK_HOME/jars</code>).</li>
