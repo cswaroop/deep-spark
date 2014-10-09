@@ -54,7 +54,7 @@ but has the advantage that it doesn't require the definition of additional entit
 Example: you have a table called 'users' and you decide to use the 'Cells' interface. Once you get an instance 'c' of the Cells object,
 to get the value of column 'address' you can issue a c.getCellByName("address").getCellValue().
 Please, refer to the Deep API documentation to know more about the Cells and Cell objects.</p></li>
-</ul><p>We encourage you to read the more comprehensive documentation hosted on the <a href="http://docs.openstratio.org/documentation.html">Openstratio website</a>.</p>
+</ul><p>We encourage you to read the more comprehensive documentation hosted on the <a href="http://docs.openstratio.org/deep/">Openstratio website</a>.</p>
 
 <p>Deep comes with an example sub project called 'deep-examples' containing a set of working examples, both in Java and Scala.
 Please, refer to the deep-example project README for further information on how to setup a working environment.</p>
@@ -171,7 +171,7 @@ Please take the time to read the java and scala examples provided in 'deep-examp
 <li>
 <strong>(optional) write the computation results out to Cassandra</strong>: we provide a way to efficiently save the result of your computation to Cassandra.
 In order to do that you must have another configuration object where you specify the output keyspace/column family. We can create the output column family for you if needed.
-Please, refer to the comprehensive Stratio Deep documentation at <a href="http://docs.openstratio.org/documentation.html">Stratio website</a>.</li>
+Please, refer to the comprehensive Deep documentation at <a href="http://docs.openstratio.org/deep/">OpenStratio website</a>.</li>
 </ul><h1>
 <a name="first-steps-with-spark-and-mongodb" class="anchor" href="#first-steps-with-spark-and-mongodb"><span class="octicon octicon-link"></span></a>First steps with Spark and MongoDB</h1>
 
@@ -180,7 +180,7 @@ Please, refer to the comprehensive Stratio Deep documentation at <a href="http:/
 <strong>Build an instance of a configuration object</strong>: this will let you tell Stratio Deep the MongoDB endpoint, the MongoDB database and collection you want to access and much more.
 It will also let you specify which interface to use (the domain entity).
 We have a factory that will help you create a configuration object using a fluent API. Creating a configuration object is an expensive operation.
-Please take the time to read the java and scala examples provided in 'deep-examples' subproject and to read the comprehensive Deep documentation at <a href="http://www.openstratio.org/examples/using-stratio-deep/">OpenStratio website</a>.</li>
+Please take the time to read the java and scala examples provided in 'deep-examples' subproject and to read the comprehensive Deep documentation at <a href="http://docs.openstratio.org/deep/">OpenStratio website</a>.</li>
 <li>
 <strong>Create an RDD</strong>: using the DeepSparkContext helper methods and providing the configuration object you've just instantiated.</li>
 <li>
