@@ -27,6 +27,8 @@ import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFunction;
 
+import scala.Tuple2;
+
 import com.stratio.deep.core.context.DeepSparkContext;
 import com.stratio.deep.core.entity.BookEntity;
 import com.stratio.deep.core.entity.CantoEntity;
@@ -35,22 +37,17 @@ import com.stratio.deep.examples.java.extractorconfig.mongodb.utils.ContextPrope
 import com.stratio.deep.mongodb.config.MongoConfigFactory;
 import com.stratio.deep.mongodb.config.MongoDeepJobConfig;
 
-import scala.Tuple2;
-
 /**
  * Created by rcrespo on 25/06/14.
  */
 public final class GroupingEntityWithMongoDB {
 
-
     private GroupingEntityWithMongoDB() {
     }
-
 
     public static void main(String[] args) {
         doMain(args);
     }
-
 
     public static void doMain(String[] args) {
         String job = "scala:groupingEntityWithMongoDB";
@@ -61,55 +58,52 @@ public final class GroupingEntityWithMongoDB {
         String inputCollection = "input";
         String outputCollection = "output";
 
-
         // Creating the Deep Context where args are Spark Master and Job Name
         ContextProperties p = new ContextProperties(args);
-	    DeepSparkContext deepContext = new DeepSparkContext(p.getCluster(), job, p.getSparkHome(),
+        DeepSparkContext deepContext = new DeepSparkContext(p.getCluster(), job, p.getSparkHome(),
                 p.getJars());
 
-
         MongoDeepJobConfig<BookEntity> inputConfigEntity =
-				        MongoConfigFactory.createMongoDB(BookEntity.class).host(host).database(database).collection(inputCollection).initialize();
+                MongoConfigFactory.createMongoDB(BookEntity.class).host(host).database(database)
+                        .collection(inputCollection).initialize();
 
         JavaRDD<BookEntity> inputRDDEntity = deepContext.createJavaRDD(inputConfigEntity);
-        JavaRDD<String> words =inputRDDEntity.flatMap(new FlatMapFunction<BookEntity, String>() {
+        JavaRDD<String> words = inputRDDEntity.flatMap(new FlatMapFunction<BookEntity, String>() {
             @Override
-            public Iterable<String> call(BookEntity bookEntity) throws Exception {
+            public Iterable<String> call(BookEntity bookEntity) {
 
                 List<String> words = new ArrayList<>();
-                for (CantoEntity canto : bookEntity.getCantoEntities()){
+                for (CantoEntity canto : bookEntity.getCantoEntities()) {
                     words.addAll(Arrays.asList(canto.getText().split(" ")));
                 }
                 return words;
             }
         });
 
-
         JavaPairRDD<String, Long> wordCount = words.mapToPair(new PairFunction<String, String, Long>() {
             @Override
-            public Tuple2<String, Long> call(String s) throws Exception {
-                return new Tuple2<>(s,1l);
+            public Tuple2<String, Long> call(String s) {
+                return new Tuple2<>(s, 1l);
             }
         });
 
-
-        JavaPairRDD<String, Long>  wordCountReduced = wordCount.reduceByKey(new Function2<Long, Long, Long>() {
+        JavaPairRDD<String, Long> wordCountReduced = wordCount.reduceByKey(new Function2<Long, Long, Long>() {
             @Override
-            public Long call(Long integer, Long integer2) throws Exception {
+            public Long call(Long integer, Long integer2) {
                 return integer + integer2;
             }
         });
 
-        JavaRDD<WordCount>  outputRDD =  wordCountReduced.map(new Function<Tuple2<String, Long>, WordCount>() {
+        JavaRDD<WordCount> outputRDD = wordCountReduced.map(new Function<Tuple2<String, Long>, WordCount>() {
             @Override
-            public WordCount call(Tuple2<String, Long> stringIntegerTuple2) throws Exception {
+            public WordCount call(Tuple2<String, Long> stringIntegerTuple2) {
                 return new WordCount(stringIntegerTuple2._1(), stringIntegerTuple2._2());
             }
         });
 
-
         MongoDeepJobConfig<WordCount> outputConfigEntity =
-				        MongoConfigFactory.createMongoDB(WordCount.class).host(host).database(database).collection(outputCollection).initialize();
+                MongoConfigFactory.createMongoDB(WordCount.class).host(host).database(database)
+                        .collection(outputCollection).initialize();
 
         deepContext.saveRDD(outputRDD.rdd(), outputConfigEntity);
 

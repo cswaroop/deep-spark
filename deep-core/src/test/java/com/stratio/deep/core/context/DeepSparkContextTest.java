@@ -1,18 +1,18 @@
 /*
-        * Copyright 2014, Stratio.
-        *
-        * Licensed under the Apache License, Version 2.0 (the "License");
-        * you may not use this file except in compliance with the License.
-        * You may obtain a copy of the License at
-        *
-        * http://www.apache.org/licenses/LICENSE-2.0
-        *
-        * Unless required by applicable law or agreed to in writing, software
-        * distributed under the License is distributed on an "AS IS" BASIS,
-        * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-        * See the License for the specific language governing permissions and
-        * limitations under the License.
-        */
+ * Copyright 2014, Stratio.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.stratio.deep.core.context;
 
@@ -73,23 +73,20 @@ public class DeepSparkContextTest {
     @Test
     public void saveRDDTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-      /*  DeepSparkContext deepSparkContext = createDeepSparkContext();
-
-        IDeepJobConfig<Cell,  IDeepJobConfig<?, ?>> ideepJobConfig = mock(IDeepJobConfig.class);
-        RDD<Cell> rdd = mock(RDD.class);
-        Method method = new Method(){
-            public Object invoke(Object obj, Object... args){
-
-                   return null;
-            }
-        };
-
-        Collection aa = PowerMockito.mock(Collection.class);
-        when(ideepJobConfig.getSaveMethod()).thenReturn(method);
-
-        deepSparkContext.saveRDD(rdd,ideepJobConfig);
-
-        Mockito.verify(method).invoke(null, rdd, ideepJobConfig);*/
+        /*
+         * DeepSparkContext deepSparkContext = createDeepSparkContext();
+         * 
+         * IDeepJobConfig<Cell, IDeepJobConfig<?, ?>> ideepJobConfig = mock(IDeepJobConfig.class); RDD<Cell> rdd =
+         * mock(RDD.class); Method method = new Method(){ public Object invoke(Object obj, Object... args){
+         * 
+         * return null; } };
+         * 
+         * Collection aa = PowerMockito.mock(Collection.class); when(ideepJobConfig.getSaveMethod()).thenReturn(method);
+         * 
+         * deepSparkContext.saveRDD(rdd,ideepJobConfig);
+         * 
+         * Mockito.verify(method).invoke(null, rdd, ideepJobConfig);
+         */
     }
 
     private DeepJavaRDD createDeepJAvaRDD(DeepRDD deepRDD) throws Exception {
@@ -106,7 +103,7 @@ public class DeepSparkContextTest {
     private ExtractorConfig createDeepJobConfig() {
         ExtractorConfig extractorConfig = mock(ExtractorConfig.class);
         when(extractorConfig.getExtractorImplClass()).thenReturn(new Object().getClass());
-        //when(extractorConfig.getInputFormatClass()).thenReturn(null);
+        // when(extractorConfig.getInputFormatClass()).thenReturn(null);
         return extractorConfig;
     }
 

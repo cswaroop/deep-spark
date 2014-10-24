@@ -276,11 +276,11 @@ public abstract class ExtractorTest<T, S extends BaseConfig<T>> implements Seria
 
     public <W> ExtractorConfig<W> getWriteExtractorConfig(String output) {
         ExtractorConfig<W> extractorConfig = getExtractorConfig(outputEntity);
-        extractorConfig.putValue(ExtractorConstants.HOST, host)
-                .putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.PORT, port)
-                .putValue(ExtractorConstants.COLLECTION, output)
-                .putValue(ExtractorConstants.CREATE_ON_WRITE, true);
+        extractorConfig.putValue(ExtractorConstants.HOST_CONSTANT, host)
+                .putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.PORT_CONSTANT, port)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, output)
+                .putValue(ExtractorConstants.CREATE_ON_WRITE_CONSTANT, true);
         extractorConfig.setExtractorImplClass(extractor);
         return extractorConfig;
     }
@@ -288,10 +288,10 @@ public abstract class ExtractorTest<T, S extends BaseConfig<T>> implements Seria
     public <W> ExtractorConfig<W> getReadExtractorConfig() {
 
         ExtractorConfig<W> extractorConfig = getExtractorConfig(inputEntity);
-        extractorConfig.putValue(ExtractorConstants.HOST, host)
-                .putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.PORT, port)
-                .putValue(ExtractorConstants.COLLECTION, tableRead);
+        extractorConfig.putValue(ExtractorConstants.HOST_CONSTANT, host)
+                .putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.PORT_CONSTANT, port)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, tableRead);
         extractorConfig.setExtractorImplClass(extractor);
         return extractorConfig;
     }
@@ -299,11 +299,11 @@ public abstract class ExtractorTest<T, S extends BaseConfig<T>> implements Seria
     public <W>ExtractorConfig<W> getInputColumnConfig(String... inputColumns) {
 
         ExtractorConfig<W> extractorConfig = getExtractorConfig(configEntity);
-        extractorConfig.putValue(ExtractorConstants.HOST, host)
-                .putValue(ExtractorConstants.DATABASE, databaseInputColumns)
-                .putValue(ExtractorConstants.PORT, port)
-                .putValue(ExtractorConstants.COLLECTION, tableRead)
-                .putValue(ExtractorConstants.INPUT_COLUMNS, inputColumns);
+        extractorConfig.putValue(ExtractorConstants.HOST_CONSTANT, host)
+                .putValue(ExtractorConstants.DATABASE_CONSTANT, databaseInputColumns)
+                .putValue(ExtractorConstants.PORT_CONSTANT, port)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, tableRead)
+                .putValue(ExtractorConstants.INPUT_COLUMNS_CONSTANT, inputColumns);
         extractorConfig.setExtractorImplClass(extractor);
         return extractorConfig;
     }
@@ -311,11 +311,11 @@ public abstract class ExtractorTest<T, S extends BaseConfig<T>> implements Seria
     public <W>ExtractorConfig<W> getFilterConfig(Filter[] filters) {
 
         ExtractorConfig<W> extractorConfig = getExtractorConfig(configEntity);
-        extractorConfig.putValue(ExtractorConstants.HOST,host)
-                .putValue(ExtractorConstants.DATABASE, databaseInputColumns)
-                .putValue(ExtractorConstants.COLLECTION,tableRead)
-                .putValue(ExtractorConstants.PORT, port)
-                .putValue(ExtractorConstants.FILTER_QUERY, filters);
+        extractorConfig.putValue(ExtractorConstants.HOST_CONSTANT,host)
+                .putValue(ExtractorConstants.DATABASE_CONSTANT, databaseInputColumns)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT,tableRead)
+                .putValue(ExtractorConstants.PORT_CONSTANT, port)
+                .putValue(ExtractorConstants.FILTER_QUERY_CONSTANT, filters);
 
         extractorConfig.setExtractorImplClass(extractor);
         return extractorConfig;

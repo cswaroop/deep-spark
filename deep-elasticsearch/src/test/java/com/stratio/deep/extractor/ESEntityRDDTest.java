@@ -83,8 +83,8 @@ public class ESEntityRDDTest extends ExtractorTest implements Serializable {
             context = new DeepSparkContext("local", "deepSparkContextTest");
 
             ExtractorConfig<BookEntity> inputConfigEntity = new ExtractorConfig(BookEntity.class);
-            inputConfigEntity.putValue(ExtractorConstants.HOST, hostConcat).putValue(ExtractorConstants.INDEX, "book")
-                    .putValue(ExtractorConstants.TYPE, "input");
+            inputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, hostConcat).putValue(ExtractorConstants.INDEX_CONSTANT, "book")
+                    .putValue(ExtractorConstants.TYPE_CONSTANT, "input");
             inputConfigEntity.setExtractorImplClass(ESEntityExtractor.class);
 
             RDD<BookEntity> inputRDDEntity = context.createRDD(inputConfigEntity);
@@ -157,9 +157,9 @@ public class ESEntityRDDTest extends ExtractorTest implements Serializable {
             });
 
             ExtractorConfig<WordCount> outputConfigEntity = new ExtractorConfig(WordCount.class);
-            outputConfigEntity.putValue(ExtractorConstants.HOST, hostConcat)
-                    .putValue(ExtractorConstants.DATABASE, "book")
-                    .putValue(ExtractorConstants.TYPE, "words");
+            outputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, hostConcat)
+                    .putValue(ExtractorConstants.DATABASE_CONSTANT, "book")
+                    .putValue(ExtractorConstants.TYPE_CONSTANT, "words");
             ;
             outputConfigEntity.setExtractorImplClass(ESEntityExtractor.class);
 

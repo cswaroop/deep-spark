@@ -67,15 +67,15 @@ public final class WritingEntityToMongoDB {
                 p.getJars());
 
         ExtractorConfig<MessageTestEntity> inputConfigEntity = new ExtractorConfig(MessageTestEntity.class);
-        inputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, inputCollection);
+        inputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, inputCollection);
         inputConfigEntity.setExtractorImplClass(MongoEntityExtractor.class);
 
         RDD<MessageTestEntity> inputRDDEntity = deepContext.createRDD(inputConfigEntity);
 
         ExtractorConfig<MessageTestEntity> outputConfigEntity = new ExtractorConfig(MessageTestEntity.class);
-        outputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, outputCollection);
+        outputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, outputCollection);
         outputConfigEntity.setExtractorImplClass(MongoEntityExtractor.class);
 
         deepContext.saveRDD(inputRDDEntity, outputConfigEntity);

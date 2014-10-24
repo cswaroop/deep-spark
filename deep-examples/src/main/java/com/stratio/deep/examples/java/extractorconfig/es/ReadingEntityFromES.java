@@ -66,9 +66,9 @@ public final class ReadingEntityFromES {
 
         Map<String, Serializable> values = new HashMap<>();
 
-        values.put(ExtractorConstants.INDEX,    index);
-        values.put(ExtractorConstants.TYPE,    type);
-        values.put(ExtractorConstants.HOST,        host );
+        values.put(ExtractorConstants.INDEX_CONSTANT,    index);
+        values.put(ExtractorConstants.TYPE_CONSTANT,    type);
+        values.put(ExtractorConstants.HOST_CONSTANT,        host );
 
         config.setExtractorImplClass(ESEntityExtractor.class);
         config.setEntityClass(WordCount.class);

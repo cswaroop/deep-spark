@@ -18,116 +18,48 @@ package com.stratio.deep.commons.config;
 
 import java.io.Serializable;
 
-import org.apache.hadoop.conf.Configuration;
-
-
 /**
  * Defines the public methods that each Stratio Deep configuration object should implement.
- *
- * @param <T> the generic type associated to this configuration object.
+ * 
+ * @param <T>
+ *            the generic type associated to this configuration object.
  */
 public interface IDeepJobConfig<T, S extends IDeepJobConfig<?, ?>> extends Serializable {
 
     /**
-     * Returns the password needed to authenticate
-     * to the remote datastore cluster.
-     *
+     * Returns the password needed to authenticate to the remote datastore cluster.
+     * 
      * @return the password used to login to the remote cluster.
      */
     String getPassword();
 
-//
-//    /**
-//     * Sets the number of rows to retrieve for each page of data fetched from Cassandra.<br/>
-//     * Defaults to 1000 rows.
-//     *
-//     * @param pageSize the number of rows per page
-//     * @return this configuration object.
-//     */
-//    S pageSize(int pageSize);
-//
-//
-//    /* Getters */
-//
-//    /**
-//     * Returns the underlying testentity class used to map the Cassandra
-//     * Column family.
-//     *
-//     * @return the entity class object associated to this configuration object.
-//     */
-//    Class<T> getEntityClass();
-
     /**
      * Returns the hostname of the cassandra server.
-     *
+     * 
      * @return the endpoint of the cassandra server.
      */
     String getHost();
 
     /**
-     * Returns the list of column names that will
-     * be fetched from the underlying datastore.
-     *
+     * Returns the list of column names that will be fetched from the underlying datastore.
+     * 
      * @return the array of column names that will be retrieved from the data store.
      */
     String[] getInputColumns();
 
     /**
-     * Returns the username used to authenticate to the cassandra server.
-     * Defaults to the empty string.
-     *
+     * Returns the username used to authenticate to the cassandra server. Defaults to the empty string.
+     * 
      * @return the username to use to login to the remote server.
      */
     String getUsername();
 
-//    /**
-//     * Sets the datastore hostname
-//     *
-//     * @param hostname the cassandra server endpoint.
-//     * @return this object.
-//     */
-//    S host(String hostname);
-//
-//    /**
-//     * Initialized the current configuration object.
-//     *
-//     * @return this object.
-//     */
-//    S initialize();
-//
-//    S initialize(ExtractorConfig extractorConfig);
-//
-//    /**
-//     * Defines a projection over the CF columns. <br/>
-//     * Key columns will always be returned, even if not specified in the columns input array.
-//     *
-//     * @param columns list of columns we want to retrieve from the datastore.
-//     * @return this object.
-//     */
-//    S inputColumns(String... columns);
-//
-//    /**
-//     * Sets the password to use to login to Cassandra. Leave empty if you do not need authentication.
-//     *
-//     * @return this object.
-//     */
-//    S password(String password);
-//
-//    /**
-//     * /**
-//     * Sets the username to use to login to Cassandra. Leave empty if you do not need authentication.
-//     *
-//     * @return this object.
-//     */
-//    S username(String username);
-
     /**
      * Returns the maximum number of rows that will be retrieved when fetching data pages from Cassandra.
-     *
+     * 
      * @return the page size
      */
     int getPageSize();
-
 
     void setRddId(int rddId);
 

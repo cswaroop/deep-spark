@@ -72,8 +72,8 @@ public final class GroupingEntityWithES {
 
 
         ExtractorConfig<BookEntity> inputConfigEntity = new ExtractorConfig(BookEntity.class);
-        inputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.INDEX,
-                index).putValue(ExtractorConstants.TYPE, type);
+        inputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.INDEX_CONSTANT,
+                index).putValue(ExtractorConstants.TYPE_CONSTANT, type);
         inputConfigEntity.setExtractorImplClass(ESEntityExtractor.class);
 
         RDD<BookEntity> inputRDDEntity = deepContext.createRDD(inputConfigEntity);
@@ -115,8 +115,8 @@ public final class GroupingEntityWithES {
 
 
         ExtractorConfig<WordCount> outputConfigEntity = new ExtractorConfig(WordCount.class);
-        outputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.INDEX, index)
-                .putValue(ExtractorConstants.TYPE, typeOut);
+        outputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.INDEX_CONSTANT, index)
+                .putValue(ExtractorConstants.TYPE_CONSTANT, typeOut);
         outputConfigEntity.setExtractorImplClass(ESEntityExtractor.class);
 
         deepContext.saveRDD(outputRDD.rdd(),outputConfigEntity);

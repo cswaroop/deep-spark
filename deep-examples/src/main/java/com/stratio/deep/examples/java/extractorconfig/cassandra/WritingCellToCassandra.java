@@ -89,11 +89,11 @@ public final class WritingCellToCassandra {
         //inputConfig.setEntityClass(TweetEntity.class);
 
         Map<String, Serializable> values = new HashMap<>();
-        values.put(ExtractorConstants.KEYSPACE, KEYSPACENAME);
-        values.put(ExtractorConstants.TABLE, TABLENAME);
-        values.put(ExtractorConstants.CQLPORT, cqlPort);
-        values.put(ExtractorConstants.RPCPORT, rpcPort);
-        values.put(ExtractorConstants.HOST, HOST);
+        values.put(ExtractorConstants.KEYSPACE_CONSTANT, KEYSPACENAME);
+        values.put(ExtractorConstants.TABLE_CONSTANT, TABLENAME);
+        values.put(ExtractorConstants.CQLPORT_CONSTANT, cqlPort);
+        values.put(ExtractorConstants.RPCPORT_CONSTANT, rpcPort);
+        values.put(ExtractorConstants.HOST_CONSTANT, HOST);
 
         inputConfig.setValues(values);
 
@@ -133,12 +133,12 @@ public final class WritingCellToCassandra {
 
         outputConfig.setExtractorImplClass(CassandraCellExtractor.class);
         Map<String, Serializable> valuesOutput = new HashMap<>();
-        valuesOutput.put(ExtractorConstants.KEYSPACE, KEYSPACENAME);
-        valuesOutput.put(ExtractorConstants.TABLE, outputTableName);
-        valuesOutput.put(ExtractorConstants.CQLPORT, cqlPort);
-        valuesOutput.put(ExtractorConstants.RPCPORT, rpcPort);
-        valuesOutput.put(ExtractorConstants.HOST, HOST);
-        valuesOutput.put(ExtractorConstants.CREATE_ON_WRITE, "true");
+        valuesOutput.put(ExtractorConstants.KEYSPACE_CONSTANT, KEYSPACENAME);
+        valuesOutput.put(ExtractorConstants.TABLE_CONSTANT, outputTableName);
+        valuesOutput.put(ExtractorConstants.CQLPORT_CONSTANT, cqlPort);
+        valuesOutput.put(ExtractorConstants.RPCPORT_CONSTANT, rpcPort);
+        valuesOutput.put(ExtractorConstants.HOST_CONSTANT, HOST);
+        valuesOutput.put(ExtractorConstants.CREATE_ON_WRITE_CONSTANT, "true");
 
         outputConfig.setValues(valuesOutput);
 

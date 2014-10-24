@@ -23,31 +23,29 @@ public class DeepSparkHadoopMapReduceUtil {
     public static JobContext newJobContext(Configuration conf, JobID jobId) {
         try {
             Class clazz = firstAvailableClass(
-                    "org.apache.hadoop.mapreduce.task.JobContextImpl",  // hadoop2, hadoop2-yarn
-                    "org.apache.hadoop.mapreduce.JobContext");           // hadoop1
+                    "org.apache.hadoop.mapreduce.task.JobContextImpl", // hadoop2, hadoop2-yarn
+                    "org.apache.hadoop.mapreduce.JobContext"); // hadoop1
 
             Constructor constructor = clazz.getDeclaredConstructor(Configuration.class, JobID.class);
 
             return (JobContext) constructor.newInstance(conf, jobId);
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             LOG.error("to use hadoop classes, we need them in the classpath " + e.getMessage());
-            throw new DeepInstantiationException(
-                    "to use hadoop classes, we need them in the classpath  " + e.getMessage());
+            throw new DeepInstantiationException("to use hadoop classes, we need them in the classpath", e);
         }
     }
 
     public static TaskAttemptContext newTaskAttemptContext(Configuration conf, TaskAttemptID attemptId) {
         try {
             Class clazz = firstAvailableClass(
-                    "org.apache.hadoop.mapreduce.task.TaskAttemptContextImpl",  // hadoop2, hadoop2-yarn
-                    "org.apache.hadoop.mapreduce.TaskAttemptContext");           // hadoop1
+                    "org.apache.hadoop.mapreduce.task.TaskAttemptContextImpl", // hadoop2, hadoop2-yarn
+                    "org.apache.hadoop.mapreduce.TaskAttemptContext"); // hadoop1
             Constructor constructor = clazz.getDeclaredConstructor(Configuration.class, TaskAttemptID.class);
             return (TaskAttemptContext) constructor.newInstance(conf, attemptId);
 
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             LOG.error("to use hadoop classes, we need them in the classpath " + e.getMessage());
-            throw new DeepInstantiationException(
-                    "to use hadoop classes, we need them in the classpath  " + e.getMessage());
+            throw new DeepInstantiationException("to use hadoop classes, we need them in the classpath", e);
         }
     }
 
@@ -59,32 +57,26 @@ public class DeepSparkHadoopMapReduceUtil {
             Constructor constructor = clazz
                     .getDeclaredConstructor(String.class, int.class, boolean.class, int.class, int.class);
             return (TaskAttemptID) constructor.newInstance(jtIdentifier, jobId, isMap, taskId, attemptId);
-        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
+                | InvocationTargetException e) {
 
             try {
-
-                // If that failed, look for the new constructor that takes a TaskType (not available in 1.x)
-                //                    Class taskTypeClass = Class.forName("org.apache.hadoop.mapreduce.TaskType");
-                //
-                //                    Method taskType = taskTypeClass.getMethod("valueOf", String.class);
 
                 TaskType type = null;
                 if (isMap) {
                     type = TaskType.MAP;
-                    //                        taskType.invoke(taskTypeClass, "MAP");
                 } else {
                     type = TaskType.REDUCE;
-                    //                        taskType.invoke(taskTypeClass, "REDUCE");
                 }
 
                 Constructor constructor = clazz.getDeclaredConstructor(String.class, int.class, TaskType.class,
                         int.class, int.class);
                 return (TaskAttemptID) constructor.newInstance(jtIdentifier, jobId, type, taskId,
                         attemptId);
-            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e1) {
+            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                    | InvocationTargetException e1) {
                 LOG.error("to use hadoop classes, we need them in the classpath " + e.getMessage());
-                throw new DeepInstantiationException(
-                        "to use hadoop classes, we need them in the classpath  " + e1.getMessage());
+                throw new DeepInstantiationException("to use hadoop classes, we need them in the classpath", e1);
             }
         }
     }

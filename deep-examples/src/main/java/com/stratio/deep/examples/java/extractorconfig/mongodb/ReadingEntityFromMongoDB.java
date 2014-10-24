@@ -60,8 +60,8 @@ public final class ReadingEntityFromMongoDB {
                 p.getJars());
 
         ExtractorConfig<MessageTestEntity> inputConfigEntity = new ExtractorConfig<>(MessageTestEntity.class);
-        inputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, inputCollection);
+        inputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, inputCollection);
         inputConfigEntity.setExtractorImplClass(MongoEntityExtractor.class);
 
         RDD<MessageTestEntity> inputRDDEntity = deepContext.createRDD(inputConfigEntity);

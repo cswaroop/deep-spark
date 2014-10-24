@@ -87,11 +87,11 @@ public final class GroupingByColumn {
         config.setEntityClass(TweetEntity.class);
 
         Map<String, Serializable> values = new HashMap<>();
-        values.put(ExtractorConstants.KEYSPACE, KEYSPACENAME);
-        values.put(ExtractorConstants.TABLE, TABLENAME);
-        values.put(ExtractorConstants.CQLPORT, CQLPORT);
-        values.put(ExtractorConstants.RPCPORT, RPCPORT);
-        values.put(ExtractorConstants.HOST, HOST);
+        values.put(ExtractorConstants.KEYSPACE_CONSTANT, KEYSPACENAME);
+        values.put(ExtractorConstants.TABLE_CONSTANT, TABLENAME);
+        values.put(ExtractorConstants.CQLPORT_CONSTANT, CQLPORT);
+        values.put(ExtractorConstants.RPCPORT_CONSTANT, RPCPORT);
+        values.put(ExtractorConstants.HOST_CONSTANT, HOST);
 
         config.setValues(values);
 

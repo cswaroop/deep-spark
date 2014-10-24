@@ -80,8 +80,8 @@ public final class WritingEntityToES {
 
         Map<String, Serializable> values = new HashMap<>();
 
-        values.put(ExtractorConstants.INDEX,    index);
-        values.put(ExtractorConstants.TYPE,        type );
+        values.put(ExtractorConstants.INDEX_CONSTANT,    index);
+        values.put(ExtractorConstants.TYPE_CONSTANT,        type );
 
         config.setExtractorImplClass(ESEntityExtractor.class);
         config.setEntityClass(BookEntity.class);
@@ -135,9 +135,9 @@ public final class WritingEntityToES {
         });
 
         ExtractorConfig<WordCount> outputConfigEntity = new ExtractorConfig(WordCount.class);
-        outputConfigEntity.putValue(ExtractorConstants.HOST, host)
-                .putValue(ExtractorConstants.INDEX, index)
-                .putValue(ExtractorConstants.TYPE, typeOut);
+        outputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host)
+                .putValue(ExtractorConstants.INDEX_CONSTANT, index)
+                .putValue(ExtractorConstants.TYPE_CONSTANT, typeOut);
         outputConfigEntity.setExtractorImplClass(ESEntityExtractor.class);
 
         deepContext.saveRDD(outputRDD.rdd(), outputConfigEntity);

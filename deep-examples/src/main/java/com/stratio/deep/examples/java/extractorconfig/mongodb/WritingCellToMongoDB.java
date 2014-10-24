@@ -56,8 +56,8 @@ public final class WritingCellToMongoDB {
                 p.getJars());
 
         ExtractorConfig<Cells> inputConfigEntity = new ExtractorConfig<>();
-        inputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, inputCollection);
+        inputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, inputCollection);
         inputConfigEntity.setExtractorImplClass(MongoCellExtractor.class);
 
         RDD<Cells> inputRDDCell = deepContext.createRDD(inputConfigEntity);
@@ -66,8 +66,8 @@ public final class WritingCellToMongoDB {
         LOG.info("prints first cell : " + inputRDDCell.first());
 
         ExtractorConfig<Cells> outputConfigEntity = new ExtractorConfig<>();
-        outputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, outputCollection);
+        outputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, outputCollection);
         outputConfigEntity.setExtractorImplClass(MongoCellExtractor.class);
 
         deepContext.saveRDD(inputRDDCell, outputConfigEntity);

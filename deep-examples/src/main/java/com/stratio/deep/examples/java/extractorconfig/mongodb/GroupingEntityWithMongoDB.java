@@ -28,6 +28,8 @@ import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.rdd.RDD;
 
+import scala.Tuple2;
+
 import com.stratio.deep.commons.config.ExtractorConfig;
 import com.stratio.deep.commons.extractor.utils.ExtractorConstants;
 import com.stratio.deep.core.context.DeepSparkContext;
@@ -36,8 +38,6 @@ import com.stratio.deep.core.entity.CantoEntity;
 import com.stratio.deep.core.entity.WordCount;
 import com.stratio.deep.mongodb.extractor.MongoEntityExtractor;
 import com.stratio.deep.utils.ContextProperties;
-
-import scala.Tuple2;
 
 /**
  * Created by rcrespo on 25/06/14.
@@ -66,14 +66,14 @@ public final class GroupingEntityWithMongoDB {
                 p.getJars());
 
         ExtractorConfig<BookEntity> inputConfigEntity = new ExtractorConfig(BookEntity.class);
-        inputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, inputCollection);
+        inputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, inputCollection);
         inputConfigEntity.setExtractorImplClass(MongoEntityExtractor.class);
 
         RDD<BookEntity> inputRDDEntity = deepContext.createRDD(inputConfigEntity);
         JavaRDD<String> words = inputRDDEntity.toJavaRDD().flatMap(new FlatMapFunction<BookEntity, String>() {
             @Override
-            public Iterable<String> call(BookEntity bookEntity) throws Exception {
+            public Iterable<String> call(BookEntity bookEntity) {
 
                 List<String> words = new ArrayList<>();
                 for (CantoEntity canto : bookEntity.getCantoEntities()) {
@@ -85,28 +85,28 @@ public final class GroupingEntityWithMongoDB {
 
         JavaPairRDD<String, Long> wordCount = words.mapToPair(new PairFunction<String, String, Long>() {
             @Override
-            public Tuple2<String, Long> call(String s) throws Exception {
+            public Tuple2<String, Long> call(String s) {
                 return new Tuple2<String, Long>(s, 1l);
             }
         });
 
         JavaPairRDD<String, Long> wordCountReduced = wordCount.reduceByKey(new Function2<Long, Long, Long>() {
             @Override
-            public Long call(Long integer, Long integer2) throws Exception {
+            public Long call(Long integer, Long integer2) {
                 return integer + integer2;
             }
         });
 
         JavaRDD<WordCount> outputRDD = wordCountReduced.map(new Function<Tuple2<String, Long>, WordCount>() {
             @Override
-            public WordCount call(Tuple2<String, Long> stringIntegerTuple2) throws Exception {
+            public WordCount call(Tuple2<String, Long> stringIntegerTuple2) {
                 return new WordCount(stringIntegerTuple2._1(), stringIntegerTuple2._2());
             }
         });
 
         ExtractorConfig<WordCount> outputConfigEntity = new ExtractorConfig(WordCount.class);
-        outputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, outputCollection);
+        outputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, outputCollection);
         outputConfigEntity.setExtractorImplClass(MongoEntityExtractor.class);
 
         deepContext.saveRDD(outputRDD.rdd(), outputConfigEntity);

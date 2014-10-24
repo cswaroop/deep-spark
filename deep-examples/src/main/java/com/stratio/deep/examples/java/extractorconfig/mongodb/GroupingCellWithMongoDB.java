@@ -64,8 +64,8 @@ public final class GroupingCellWithMongoDB {
                 p.getJars());
 
         ExtractorConfig<Cells> inputConfigEntity = new ExtractorConfig<>();
-        inputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, inputCollection);
+        inputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, inputCollection);
         inputConfigEntity.setExtractorImplClass(MongoCellExtractor.class);
 
         RDD<Cells> inputRDDEntity = deepContext.createRDD(inputConfigEntity);
@@ -105,8 +105,8 @@ public final class GroupingCellWithMongoDB {
         });
 
         ExtractorConfig<Cells> outputConfigEntity = new ExtractorConfig<>();
-        outputConfigEntity.putValue(ExtractorConstants.HOST, host).putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, outputCollection);
+        outputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host).putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, outputCollection);
         outputConfigEntity.setExtractorImplClass(MongoCellExtractor.class);
 
         deepContext.saveRDD(outputRDD.rdd(), outputConfigEntity);

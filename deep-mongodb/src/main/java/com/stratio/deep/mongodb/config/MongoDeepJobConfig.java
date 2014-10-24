@@ -16,23 +16,23 @@
 
 package com.stratio.deep.mongodb.config;
 
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.COLLECTION;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.DATABASE;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.FILTER_QUERY;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.HOST;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PORT;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.INPUT_COLUMNS;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.INPUT_KEY;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PASSWORD;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.READ_PREFERENCE;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.REPLICA_SET;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.SORT;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.SPLIT_SIZE;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USERNAME;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USE_CHUNKS;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USE_SHARD;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USE_SPLITS;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.IGNORE_ID_FIELD;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.COLLECTION_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.DATABASE_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.FILTER_QUERY_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.HOST_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PORT_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.INPUT_COLUMNS_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.INPUT_KEY_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PASSWORD_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.READ_PREFERENCE_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.REPLICA_SET_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.SORT_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.SPLIT_SIZE_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USERNAME_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USE_CHUNKS_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USE_SHARD_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USE_SPLITS_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.IGNORE_ID_FIELD_CONSTANT;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -538,75 +538,75 @@ public class MongoDeepJobConfig<T> extends HadoopConfig<T> implements IMongoDeep
     public MongoDeepJobConfig<T> initialize(ExtractorConfig extractorConfig) {
         Map<String, Serializable> values = extractorConfig.getValues();
 
-        if (values.get(USERNAME) != null) {
-            username(extractorConfig.getString(USERNAME));
+        if (values.get(USERNAME_CONSTANT) != null) {
+            username(extractorConfig.getString(USERNAME_CONSTANT));
         }
 
-        if (values.get(PASSWORD) != null) {
-            password(extractorConfig.getString(PASSWORD));
+        if (values.get(PASSWORD_CONSTANT) != null) {
+            password(extractorConfig.getString(PASSWORD_CONSTANT));
         }
 
-        if (values.get(HOST) != null) {
-            host((extractorConfig.getStringArray(HOST)));
+        if (values.get(HOST_CONSTANT) != null) {
+            host((extractorConfig.getStringArray(HOST_CONSTANT)));
         }
 
-        if(values.get(PORT)!=null){
-            port((extractorConfig.getInteger(PORT)));
+        if(values.get(PORT_CONSTANT)!=null){
+            port((extractorConfig.getInteger(PORT_CONSTANT)));
         }
 
-        if(values.get(COLLECTION)!=null){
-            collection(extractorConfig.getString(COLLECTION));
+        if(values.get(COLLECTION_CONSTANT)!=null){
+            collection(extractorConfig.getString(COLLECTION_CONSTANT));
         }
 
-        if (values.get(INPUT_COLUMNS) != null) {
-            inputColumns(extractorConfig.getStringArray(INPUT_COLUMNS));
+        if (values.get(INPUT_COLUMNS_CONSTANT) != null) {
+            inputColumns(extractorConfig.getStringArray(INPUT_COLUMNS_CONSTANT));
         }
 
-        if (values.get(DATABASE) != null) {
-            database(extractorConfig.getString(DATABASE));
+        if (values.get(DATABASE_CONSTANT) != null) {
+            database(extractorConfig.getString(DATABASE_CONSTANT));
         }
 
-        if (values.get(REPLICA_SET) != null) {
-            replicaSet(extractorConfig.getString(REPLICA_SET));
+        if (values.get(REPLICA_SET_CONSTANT) != null) {
+            replicaSet(extractorConfig.getString(REPLICA_SET_CONSTANT));
         }
 
-        if (values.get(READ_PREFERENCE) != null) {
-            readPreference(extractorConfig.getString(READ_PREFERENCE));
+        if (values.get(READ_PREFERENCE_CONSTANT) != null) {
+            readPreference(extractorConfig.getString(READ_PREFERENCE_CONSTANT));
         }
 
-        if (values.get(SORT) != null) {
-            sort(extractorConfig.getString(SORT));
+        if (values.get(SORT_CONSTANT) != null) {
+            sort(extractorConfig.getString(SORT_CONSTANT));
         }
 
-        if(values.get(FILTER_QUERY)!=null){
-            filterQuery(extractorConfig.getFilterArray(FILTER_QUERY));
+        if(values.get(FILTER_QUERY_CONSTANT)!=null){
+            filterQuery(extractorConfig.getFilterArray(FILTER_QUERY_CONSTANT));
         }
 
-        if (values.get(INPUT_KEY) != null) {
-            inputKey(extractorConfig.getString(INPUT_KEY));
+        if (values.get(INPUT_KEY_CONSTANT) != null) {
+            inputKey(extractorConfig.getString(INPUT_KEY_CONSTANT));
         }
 
-        if (values.get(IGNORE_ID_FIELD) != null && extractorConfig.getBoolean(IGNORE_ID_FIELD) == true) {
+        if (values.get(IGNORE_ID_FIELD_CONSTANT) != null && extractorConfig.getBoolean(IGNORE_ID_FIELD_CONSTANT) == true) {
             ignoreIdField();
         }
 
-        if (values.get(INPUT_KEY) != null) {
-            inputKey(extractorConfig.getString(INPUT_KEY));
+        if (values.get(INPUT_KEY_CONSTANT) != null) {
+            inputKey(extractorConfig.getString(INPUT_KEY_CONSTANT));
         }
 
-        if (values.get(USE_SHARD) != null) {
-            useShards(extractorConfig.getBoolean(USE_SHARD));
+        if (values.get(USE_SHARD_CONSTANT) != null) {
+            useShards(extractorConfig.getBoolean(USE_SHARD_CONSTANT));
         }
 
-        if (values.get(USE_SPLITS) != null) {
-            createInputSplit(extractorConfig.getBoolean(USE_SPLITS));
+        if (values.get(USE_SPLITS_CONSTANT) != null) {
+            createInputSplit(extractorConfig.getBoolean(USE_SPLITS_CONSTANT));
         }
 
-        if (values.get(USE_CHUNKS) != null) {
-            splitsUseChunks(extractorConfig.getBoolean(USE_CHUNKS));
+        if (values.get(USE_CHUNKS_CONSTANT) != null) {
+            splitsUseChunks(extractorConfig.getBoolean(USE_CHUNKS_CONSTANT));
         }
-        if(values.get(SPLIT_SIZE)!=null){
-            pageSize(extractorConfig.getInteger(SPLIT_SIZE));
+        if(values.get(SPLIT_SIZE_CONSTANT)!=null){
+            pageSize(extractorConfig.getInteger(SPLIT_SIZE_CONSTANT));
         }
 
         this.initialize();

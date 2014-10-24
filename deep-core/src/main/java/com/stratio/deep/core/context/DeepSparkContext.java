@@ -14,9 +14,6 @@
 
 package com.stratio.deep.core.context;
 
-import static com.stratio.deep.commons.utils.Constants.SPARK_PARTITION_ID;
-import static com.stratio.deep.commons.utils.Constants.SPARK_RDD_ID;
-
 import java.io.Serializable;
 import java.util.Map;
 
@@ -33,12 +30,11 @@ import com.stratio.deep.commons.config.IDeepJobConfig;
 import com.stratio.deep.commons.exception.DeepIOException;
 import com.stratio.deep.core.function.PrepareSaveFunction;
 import com.stratio.deep.core.rdd.DeepJavaRDD;
-import com.stratio.deep.core.rdd.DeepJobRDD;
 import com.stratio.deep.core.rdd.DeepRDD;
 
 /**
  * Entry point to the Cassandra-aware Spark context.
- *
+ * 
  * @author Luca Rosellini <luca@stratio.com>
  */
 public class DeepSparkContext extends JavaSparkContext implements Serializable {
@@ -47,8 +43,9 @@ public class DeepSparkContext extends JavaSparkContext implements Serializable {
 
     /**
      * Overridden superclass constructor.
-     *
-     * @param sc an already created spark context.
+     * 
+     * @param sc
+     *            an already created spark context.
      */
     public DeepSparkContext(SparkContext sc) {
         super(sc);
@@ -56,9 +53,11 @@ public class DeepSparkContext extends JavaSparkContext implements Serializable {
 
     /**
      * Overridden superclass constructor.
-     *
-     * @param master  the url of the master node.
-     * @param appName the name of the application.
+     * 
+     * @param master
+     *            the url of the master node.
+     * @param appName
+     *            the name of the application.
      */
     public DeepSparkContext(String master, String appName) {
         super(master, appName);
@@ -66,11 +65,15 @@ public class DeepSparkContext extends JavaSparkContext implements Serializable {
 
     /**
      * Overridden superclass constructor.
-     *
-     * @param master    the url of the master node.
-     * @param appName   the name of the application.
-     * @param sparkHome the spark home folder.
-     * @param jarFile   the jar file to serialize and send to all the cluster nodes.
+     * 
+     * @param master
+     *            the url of the master node.
+     * @param appName
+     *            the name of the application.
+     * @param sparkHome
+     *            the spark home folder.
+     * @param jarFile
+     *            the jar file to serialize and send to all the cluster nodes.
      */
     public DeepSparkContext(String master, String appName, String sparkHome, String jarFile) {
         super(master, appName, sparkHome, jarFile);
@@ -78,11 +81,15 @@ public class DeepSparkContext extends JavaSparkContext implements Serializable {
 
     /**
      * Overridden superclass constructor.
-     *
-     * @param master    the url of the master node.
-     * @param appName   the name of the application.
-     * @param sparkHome the spark home folder.
-     * @param jars      the jar file(s) to serialize and send to all the cluster nodes.
+     * 
+     * @param master
+     *            the url of the master node.
+     * @param appName
+     *            the name of the application.
+     * @param sparkHome
+     *            the spark home folder.
+     * @param jars
+     *            the jar file(s) to serialize and send to all the cluster nodes.
      */
     public DeepSparkContext(String master, String appName, String sparkHome, String[] jars) {
         super(master, appName, sparkHome, jars);
@@ -90,12 +97,17 @@ public class DeepSparkContext extends JavaSparkContext implements Serializable {
 
     /**
      * Overridden superclass constructor.
-     *
-     * @param master      the url of the master node.
-     * @param appName     the name of the application.
-     * @param sparkHome   the spark home folder.
-     * @param jars        the jar file(s) to serialize and send to all the cluster nodes.
-     * @param environment a map of environment variables.
+     * 
+     * @param master
+     *            the url of the master node.
+     * @param appName
+     *            the name of the application.
+     * @param sparkHome
+     *            the spark home folder.
+     * @param jars
+     *            the jar file(s) to serialize and send to all the cluster nodes.
+     * @param environment
+     *            a map of environment variables.
      */
     public DeepSparkContext(String master, String appName, String sparkHome, String[] jars,
             Map<String, String> environment) {

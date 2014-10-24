@@ -75,11 +75,11 @@ public final class ReadingEntityFromMongoDBReplicaSet {
         //                .database(database).collection(inputCollection).replicaSet(replicaSet).readPreference(readPreference).initialize();
 
         ExtractorConfig<MessageTestEntity> inputConfigEntity = new ExtractorConfig<>(MessageTestEntity.class);
-        inputConfigEntity.putValue(ExtractorConstants.HOST, new String[] { host1, host2, host3 })
-                .putValue(ExtractorConstants.DATABASE, database)
-                .putValue(ExtractorConstants.COLLECTION, inputCollection)
-                .putValue(ExtractorConstants.REPLICA_SET, replicaSet)
-                .putValue(ExtractorConstants.READ_PREFERENCE, readPreference)
+        inputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, new String[] { host1, host2, host3 })
+                .putValue(ExtractorConstants.DATABASE_CONSTANT, database)
+                .putValue(ExtractorConstants.COLLECTION_CONSTANT, inputCollection)
+                .putValue(ExtractorConstants.REPLICA_SET_CONSTANT, replicaSet)
+                .putValue(ExtractorConstants.READ_PREFERENCE_CONSTANT, readPreference)
                 .setExtractorImplClass(MongoEntityExtractor.class);
 
         // createJavaRDD

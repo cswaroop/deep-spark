@@ -74,9 +74,9 @@ public final class WritingCellToES {
 
         Map<String, Serializable> values = new HashMap<>();
 
-        values.put(ExtractorConstants.INDEX,    index);
-        values.put(ExtractorConstants.TYPE,    type);
-        values.put(ExtractorConstants.HOST,        host );
+        values.put(ExtractorConstants.INDEX_CONSTANT,    index);
+        values.put(ExtractorConstants.TYPE_CONSTANT,    type);
+        values.put(ExtractorConstants.HOST_CONSTANT,        host );
 
 
         config.setExtractorImplClass(ESCellExtractor.class);
@@ -124,9 +124,9 @@ public final class WritingCellToES {
         });
 
         ExtractorConfig<Cells> outputConfigEntity = new ExtractorConfig<>();
-        outputConfigEntity.putValue(ExtractorConstants.HOST, host)
-                .putValue(ExtractorConstants.INDEX, index)
-                .putValue(ExtractorConstants.TYPE, typeOut);
+        outputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, host)
+                .putValue(ExtractorConstants.INDEX_CONSTANT, index)
+                .putValue(ExtractorConstants.TYPE_CONSTANT, typeOut);
         outputConfigEntity.setExtractorImplClass(ESCellExtractor.class);
 
         deepContext.saveRDD(outputRDD.rdd(), outputConfigEntity);

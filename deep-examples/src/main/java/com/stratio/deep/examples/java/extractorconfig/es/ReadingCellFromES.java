@@ -60,8 +60,8 @@ public final class ReadingCellFromES {
 
         Map<String, Serializable> values = new HashMap<>();
 
-        values.put(ExtractorConstants.DATABASE, database);
-        values.put(ExtractorConstants.HOST, host);
+        values.put(ExtractorConstants.DATABASE_CONSTANT, database);
+        values.put(ExtractorConstants.HOST_CONSTANT, host);
 
         config.setExtractorImplClass(ESCellExtractor.class);
         config.setValues(values);

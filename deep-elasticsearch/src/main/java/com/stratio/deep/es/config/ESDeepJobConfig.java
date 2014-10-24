@@ -16,8 +16,8 @@
 
 package com.stratio.deep.es.config;
 
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.FILTER_QUERY;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.INPUT_COLUMNS;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.FILTER_QUERY_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.INPUT_COLUMNS_CONSTANT;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -324,37 +324,37 @@ public class ESDeepJobConfig<T> extends HadoopConfig<T> implements IESDeepJobCon
 
         Map<String, String> values = extractorConfig.getValues();
 
-        if (values.get(ExtractorConstants.USERNAME) != null) {
-            username(extractorConfig.getString(ExtractorConstants.USERNAME));
+        if (values.get(ExtractorConstants.USERNAME_CONSTANT) != null) {
+            username(extractorConfig.getString(ExtractorConstants.USERNAME_CONSTANT));
         }
 
-        if (values.get(ExtractorConstants.PASSWORD) != null) {
-            password(extractorConfig.getString(ExtractorConstants.PASSWORD));
+        if (values.get(ExtractorConstants.PASSWORD_CONSTANT) != null) {
+            password(extractorConfig.getString(ExtractorConstants.PASSWORD_CONSTANT));
         }
 
-        if (values.get(ExtractorConstants.HOST) != null) {
-            host(extractorConfig.getString(ExtractorConstants.HOST));
+        if (values.get(ExtractorConstants.HOST_CONSTANT) != null) {
+            host(extractorConfig.getString(ExtractorConstants.HOST_CONSTANT));
         }
 
-        if (values.get(ExtractorConstants.PORT) != null) {
-            port(extractorConfig.getInteger(ExtractorConstants.PORT));
+        if (values.get(ExtractorConstants.PORT_CONSTANT) != null) {
+            port(extractorConfig.getInteger(ExtractorConstants.PORT_CONSTANT));
         }
 
-        if(values.get(ExtractorConstants.INDEX)!=null){
-            index = extractorConfig.getString(ExtractorConstants.INDEX);
+        if(values.get(ExtractorConstants.INDEX_CONSTANT)!=null){
+            index = extractorConfig.getString(ExtractorConstants.INDEX_CONSTANT);
 
         }
 
-        if(values.get(ExtractorConstants.TYPE)!= null){
-            type = extractorConfig.getString(ExtractorConstants.TYPE);
+        if(values.get(ExtractorConstants.TYPE_CONSTANT)!= null){
+            type = extractorConfig.getString(ExtractorConstants.TYPE_CONSTANT);
         }
 
-        if (values.get(INPUT_COLUMNS) != null) {
-            inputColumns(extractorConfig.getStringArray(INPUT_COLUMNS));
+        if (values.get(INPUT_COLUMNS_CONSTANT) != null) {
+            inputColumns(extractorConfig.getStringArray(INPUT_COLUMNS_CONSTANT));
         }
 
-        if (values.get(FILTER_QUERY) != null) {
-            filterQuery(extractorConfig.getFilterArray(FILTER_QUERY));
+        if (values.get(FILTER_QUERY_CONSTANT) != null) {
+            filterQuery(extractorConfig.getFilterArray(FILTER_QUERY_CONSTANT));
         }
 
         this.initialize();

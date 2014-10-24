@@ -70,8 +70,8 @@ public class MongoCellExtractorTest extends ExtractorTest {
         try {
 
             ExtractorConfig<Cells> inputConfigEntity = new ExtractorConfig(Cells.class);
-            inputConfigEntity.putValue(ExtractorConstants.HOST, hostConcat).putValue(ExtractorConstants.DATABASE, "book")
-                    .putValue(ExtractorConstants.COLLECTION, "input");
+            inputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, hostConcat).putValue(ExtractorConstants.DATABASE_CONSTANT, "book")
+                    .putValue(ExtractorConstants.COLLECTION_CONSTANT, "input");
             inputConfigEntity.setExtractorImplClass(MongoCellExtractor.class);
 
             RDD<Cells> inputRDDEntity = context.createRDD(inputConfigEntity);
@@ -141,8 +141,8 @@ public class MongoCellExtractorTest extends ExtractorTest {
             });
 
             ExtractorConfig<Cells> outputConfigEntity = new ExtractorConfig(Cells.class);
-            outputConfigEntity.putValue(ExtractorConstants.HOST, hostConcat).putValue(ExtractorConstants.DATABASE, "book")
-                    .putValue(ExtractorConstants.COLLECTION, "outputCell");
+            outputConfigEntity.putValue(ExtractorConstants.HOST_CONSTANT, hostConcat).putValue(ExtractorConstants.DATABASE_CONSTANT, "book")
+                    .putValue(ExtractorConstants.COLLECTION_CONSTANT, "outputCell");
             outputConfigEntity.setExtractorImplClass(MongoCellExtractor.class);
 
             context.saveRDD(outputRDD.rdd(), outputConfigEntity);

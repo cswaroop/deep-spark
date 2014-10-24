@@ -88,11 +88,11 @@ public final class AggregatingData {
         config.setExtractorImplClass(CassandraEntityExtractor.class);
 
         Map<String, Serializable> values = new HashMap<>();
-        values.put(ExtractorConstants.KEYSPACE, keySpace);
-        values.put(ExtractorConstants.TABLE, tableName);
-        values.put(ExtractorConstants.CQLPORT, cqlPort);
-        values.put(ExtractorConstants.RPCPORT, rcpPort);
-        values.put(ExtractorConstants.HOST, host);
+        values.put(ExtractorConstants.KEYSPACE_CONSTANT, keySpace);
+        values.put(ExtractorConstants.TABLE_CONSTANT, tableName);
+        values.put(ExtractorConstants.CQLPORT_CONSTANT, cqlPort);
+        values.put(ExtractorConstants.RPCPORT_CONSTANT, rcpPort);
+        values.put(ExtractorConstants.HOST_CONSTANT, host);
 
         config.setValues(values);
 

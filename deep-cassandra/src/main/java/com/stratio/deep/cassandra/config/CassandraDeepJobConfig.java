@@ -18,24 +18,24 @@ package com.stratio.deep.cassandra.config;
 
 import static com.datastax.driver.core.querybuilder.QueryBuilder.eq;
 import static com.stratio.deep.cassandra.util.CassandraUtils.createTableQueryGenerator;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PASSWORD;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.HOST;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.INPUT_COLUMNS;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.KEYSPACE;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PAGE_SIZE;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PASSWORD;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.READ_CONSISTENCY_LEVEL;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.RPCPORT;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.TABLE;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USERNAME;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.WRITE_CONSISTENCY_LEVEL;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.SPLIT_SIZE;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.BATCHSIZE;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.COLUMN_FAMILY;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PASSWORD_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.HOST_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.INPUT_COLUMNS_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.KEYSPACE_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PAGE_SIZE_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.PASSWORD_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.READ_CONSISTENCY_LEVEL_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.RPCPORT_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.TABLE_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.USERNAME_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.WRITE_CONSISTENCY_LEVEL_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.SPLIT_SIZE_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.BATCHSIZE_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.COLUMN_FAMILY_CONSTANT;
 import static com.stratio.deep.commons.utils.Utils.quote;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.CQLPORT;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.CREATE_ON_WRITE;
-import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.BISECT_FACTOR;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.CQLPORT_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.CREATE_ON_WRITE_CONSTANT;
+import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.BISECT_FACTOR_CONSTANT;
 
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -493,75 +493,75 @@ public abstract class CassandraDeepJobConfig<T> extends DeepJobConfig<T> impleme
 
         Map<String, Serializable> values = extractorConfig.getValues();
 
-        if (values.get(USERNAME) != null) {
-            username(extractorConfig.getString(USERNAME));
+        if (values.get(USERNAME_CONSTANT) != null) {
+            username(extractorConfig.getString(USERNAME_CONSTANT));
         }
 
-        if (values.get(PASSWORD) != null) {
-            password(extractorConfig.getString(PASSWORD));
+        if (values.get(PASSWORD_CONSTANT) != null) {
+            password(extractorConfig.getString(PASSWORD_CONSTANT));
         }
 
-        if (values.get(HOST) != null) {
-            host(extractorConfig.getString(HOST));
+        if (values.get(HOST_CONSTANT) != null) {
+            host(extractorConfig.getString(HOST_CONSTANT));
         }
 
-        if (values.get(BATCHSIZE) != null) {
-            batchSize(extractorConfig.getInteger(BATCHSIZE));
+        if (values.get(BATCHSIZE_CONSTANT) != null) {
+            batchSize(extractorConfig.getInteger(BATCHSIZE_CONSTANT));
         }
 
-        if (values.get(CQLPORT) != null) {
-            cqlPort(extractorConfig.getInteger(CQLPORT));
+        if (values.get(CQLPORT_CONSTANT) != null) {
+            cqlPort(extractorConfig.getInteger(CQLPORT_CONSTANT));
         }
-        if (values.get(TABLE) != null) {
-            table(extractorConfig.getString(TABLE));
+        if (values.get(TABLE_CONSTANT) != null) {
+            table(extractorConfig.getString(TABLE_CONSTANT));
         }
-        if (values.get(KEYSPACE) != null) {
-            keyspace(extractorConfig.getString(KEYSPACE));
+        if (values.get(KEYSPACE_CONSTANT) != null) {
+            keyspace(extractorConfig.getString(KEYSPACE_CONSTANT));
         }
-        if (values.get(COLUMN_FAMILY) != null) {
-            columnFamily(extractorConfig.getString(COLUMN_FAMILY));
-        }
-
-        if (values.get(RPCPORT) != null) {
-            rpcPort(extractorConfig.getInteger(RPCPORT));
+        if (values.get(COLUMN_FAMILY_CONSTANT) != null) {
+            columnFamily(extractorConfig.getString(COLUMN_FAMILY_CONSTANT));
         }
 
-        if (values.get(CREATE_ON_WRITE) != null) {
-            createTableOnWrite(extractorConfig.getBoolean(CREATE_ON_WRITE));
+        if (values.get(RPCPORT_CONSTANT) != null) {
+            rpcPort(extractorConfig.getInteger(RPCPORT_CONSTANT));
         }
 
-        if (values.get(PAGE_SIZE) != null) {
-            pageSize(extractorConfig.getInteger(PAGE_SIZE));
+        if (values.get(CREATE_ON_WRITE_CONSTANT) != null) {
+            createTableOnWrite(extractorConfig.getBoolean(CREATE_ON_WRITE_CONSTANT));
         }
 
-        if (values.get(READ_CONSISTENCY_LEVEL) != null) {
-            readConsistencyLevel(extractorConfig.getString(READ_CONSISTENCY_LEVEL));
+        if (values.get(PAGE_SIZE_CONSTANT) != null) {
+            pageSize(extractorConfig.getInteger(PAGE_SIZE_CONSTANT));
         }
 
-        if (values.get(WRITE_CONSISTENCY_LEVEL) != null) {
-            writeConsistencyLevel(extractorConfig.getString(WRITE_CONSISTENCY_LEVEL));
+        if (values.get(READ_CONSISTENCY_LEVEL_CONSTANT) != null) {
+            readConsistencyLevel(extractorConfig.getString(READ_CONSISTENCY_LEVEL_CONSTANT));
         }
 
-        if (values.get(INPUT_COLUMNS) != null) {
-            inputColumns(extractorConfig.getStringArray(INPUT_COLUMNS));
+        if (values.get(WRITE_CONSISTENCY_LEVEL_CONSTANT) != null) {
+            writeConsistencyLevel(extractorConfig.getString(WRITE_CONSISTENCY_LEVEL_CONSTANT));
         }
 
-        if (values.get(BISECT_FACTOR) != null) {
-            bisectFactor(extractorConfig.getInteger(BISECT_FACTOR));
+        if (values.get(INPUT_COLUMNS_CONSTANT) != null) {
+            inputColumns(extractorConfig.getStringArray(INPUT_COLUMNS_CONSTANT));
         }
 
-        if(values.get(SPLIT_SIZE)!=null){
-            splitSize(extractorConfig.getInteger(SPLIT_SIZE));
+        if (values.get(BISECT_FACTOR_CONSTANT) != null) {
+            bisectFactor(extractorConfig.getInteger(BISECT_FACTOR_CONSTANT));
+        }
+
+        if(values.get(SPLIT_SIZE_CONSTANT)!=null){
+            splitSize(extractorConfig.getInteger(SPLIT_SIZE_CONSTANT));
         }
 
 
-        if(values.get(ExtractorConstants.FILTER_FIELD)!=null){
-            Pair<String, Serializable> filterFields =  extractorConfig.getPair(ExtractorConstants.FILTER_FIELD, String.class, Serializable.class);
+        if(values.get(ExtractorConstants.FILTER_FIELD_CONSTANT)!=null){
+            Pair<String, Serializable> filterFields =  extractorConfig.getPair(ExtractorConstants.FILTER_FIELD_CONSTANT, String.class, Serializable.class);
             filterByField(filterFields.left, filterFields.right);
         }
 
-        if(values.get(ExtractorConstants.FILTER_QUERY)!=null){
-            filters(extractorConfig.getFilterArray(ExtractorConstants.FILTER_QUERY));
+        if(values.get(ExtractorConstants.FILTER_QUERY_CONSTANT)!=null){
+            filters(extractorConfig.getFilterArray(ExtractorConstants.FILTER_QUERY_CONSTANT));
 
 
         }

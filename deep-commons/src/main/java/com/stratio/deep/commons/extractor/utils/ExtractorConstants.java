@@ -5,52 +5,71 @@ package com.stratio.deep.commons.extractor.utils;
  */
 public class ExtractorConstants {
 
-    public static  String PASSWORD = "password";
+    public static final String PASSWORD_CONSTANT = "password";
 
+    public static final String CATALOG_CONSTANT = "catalog";
 
-    public static  String CATALOG = "catalog";
-    public static  String KEYSPACE = CATALOG;
-    public static  String DATABASE = KEYSPACE;
-    public static  String INDEX = CATALOG;
-    public static  String TABLE    = "table";
-    public static  String COLLECTION = TABLE;
-    public static  String TYPE = TABLE;
-    public static  String HOST     = "host";
-    public static  String PORT     = "port";
-    public static  String INPUT_COLUMNS = "inputColumns";
-    public static  String USERNAME  ="user";
-    public static  String PAGE_SIZE = "page";
-    public static  String SESSION  = "session";
-    public static  String PORT2  = "port2";
-    public static  String CQLPORT  = PORT2;
-    public static  String RPCPORT  = PORT;
-    public static  String COLUMN_FAMILY  = "columnFamily";
-    public static  String BISECT_FACTOR  = "bisecFactor";
-    public static  String CREATE_ON_WRITE  = "createOnWrite";
-    public static  String BATCHSIZE  = "batchSize";
-    public static  String READ_CONSISTENCY_LEVEL = "readConsistencyLevel";
-    public static String WRITE_CONSISTENCY_LEVEL = "writeConsistencyLevel";
+    public static final String KEYSPACE_CONSTANT = CATALOG_CONSTANT;
 
-    public static String REPLICA_SET = "replicaSet";
+    public static final String DATABASE_CONSTANT = KEYSPACE_CONSTANT;
 
-    public static String READ_PREFERENCE = "readPreference";
+    public static final String INDEX_CONSTANT = CATALOG_CONSTANT;
 
-    public static String SORT = "sort";
+    public static final String TABLE_CONSTANT = "table";
 
-    public static String FILTER_FIELD = "filterField";
+    public static final String COLLECTION_CONSTANT = TABLE_CONSTANT;
 
-    public static String FILTER_QUERY = "filterQuery";
+    public static final String TYPE_CONSTANT = TABLE_CONSTANT;
 
-    public static String INPUT_KEY = "inputKey";
+    public static final String HOST_CONSTANT = "host";
 
-    public static String IGNORE_ID_FIELD = "ignoreIdField";
+    public static final String PORT_CONSTANT = "port";
 
-    public static String USE_SHARD = "useShard";
+    public static final String INPUT_COLUMNS_CONSTANT = "inputColumns";
 
-    public static String USE_SPLITS = "useSplit";
+    public static final String USERNAME_CONSTANT = "user";
 
-    public static String USE_CHUNKS = "useChunk";
+    public static final String PAGE_SIZE_CONSTANT = "page";
 
-    public static String SPLIT_SIZE = "splitSize";
+    public static final String SESSION_CONSTANT = "session";
 
+    public static final String PORT2_CONSTANT = "port2";
+
+    public static final String CQLPORT_CONSTANT = PORT2_CONSTANT;
+
+    public static final String RPCPORT_CONSTANT = PORT_CONSTANT;
+
+    public static final String COLUMN_FAMILY_CONSTANT = "columnFamily";
+
+    public static final String BISECT_FACTOR_CONSTANT = "bisecFactor";
+
+    public static final String CREATE_ON_WRITE_CONSTANT = "createOnWrite";
+
+    public static final String BATCHSIZE_CONSTANT = "batchSize";
+
+    public static final String READ_CONSISTENCY_LEVEL_CONSTANT = "readConsistencyLevel";
+
+    public static final String WRITE_CONSISTENCY_LEVEL_CONSTANT = "writeConsistencyLevel";
+
+    public static final String REPLICA_SET_CONSTANT = "replicaSet";
+
+    public static final String READ_PREFERENCE_CONSTANT = "readPreference";
+
+    public static final String SORT_CONSTANT = "sort";
+
+    public static final String FILTER_FIELD_CONSTANT = "filterField";
+
+    public static final String FILTER_QUERY_CONSTANT = "filterQuery";
+
+    public static final String INPUT_KEY_CONSTANT = "inputKey";
+
+    public static final String IGNORE_ID_FIELD_CONSTANT = "ignoreIdField";
+
+    public static final String USE_SHARD_CONSTANT = "useShard";
+
+    public static final String USE_SPLITS_CONSTANT = "useSplit";
+
+    public static final String USE_CHUNKS_CONSTANT = "useChunk";
+
+    public static final String SPLIT_SIZE_CONSTANT = "splitSize";
 }
