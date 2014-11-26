@@ -124,12 +124,12 @@ org.apache.cassandra,org.apache.thrift,com.github.stephenc.high-scale-lib,com.go
     </distributionManagement>
 
     <profiles>
-        <!--<profile>-->
-        <!--<id>dev</id>-->
-        <!--<activation>-->
-        <!--<activeByDefault>true</activeByDefault>-->
-        <!--</activation>-->
-        <!--</profile>-->
+        <profile>
+        <id>dev</id>
+        <activation>
+        <activeByDefault>true</activeByDefault>
+        </activation>
+        </profile>
         <profile>
             <id>release</id>
             <build>
