@@ -27,8 +27,6 @@ public final class Constants {
     public static final int DEFAULT_CASSANDRA_RPC_PORT = 9160;
     public static final int DEFAULT_CASSANDRA_CQL_PORT = 9042;
 
-    public static final String DEFAULT_MONGO_HOST = "localhost:27017";
-    public static final String DEFAULT_HDFS_HOST = "localhost:9000";
 
     public static final int DEFAULT_BATCH_SIZE = 100;
 
@@ -39,9 +37,6 @@ public final class Constants {
 
     public static final int DEFAULT_SPLIT_SIZE = 100000;
 
-    public static final String SPARK_PARTITION_ID = "spark.partition.id";
-
-    public static final String SPARK_RDD_ID = "spark.rdd.id";
 
     private Constants() {
     }

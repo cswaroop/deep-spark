@@ -48,7 +48,7 @@ public class JdbcNeo4JWriter<T> extends JdbcWriter<T> {
      * {@inheritDoc}
      */
     @Override
-    public void save(Map<String, Object> row) throws Exception {
+    public void save(Map<String, Object> row)  {
         throw new UnsupportedOperationException("Saving not yet supported for Neo4J");
     }
 

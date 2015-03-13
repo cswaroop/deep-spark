@@ -37,6 +37,9 @@ import org.apache.spark.rdd.JdbcPartition;
  */
 public class JdbcReader implements IJdbcReader {
 
+
+
+
     /**
      * JDBC Deep Job configuration.
      */
@@ -149,5 +152,7 @@ public class JdbcReader implements IJdbcReader {
     public void setJdbcDeepJobConfig(JdbcDeepJobConfig jdbcDeepJobConfig) {
         this.jdbcDeepJobConfig = jdbcDeepJobConfig;
     }
+
+
 
 }

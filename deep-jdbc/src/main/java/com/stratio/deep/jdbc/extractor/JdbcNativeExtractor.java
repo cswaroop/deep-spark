@@ -32,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -40,9 +41,15 @@ import java.util.Map;
  */
 public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IExtractor<T, S> {
 
+    /**
+     * The serialUID.
+     */
     private static final long serialVersionUID = -298383130965427783L;
 
-    private static final Logger LOG = LoggerFactory.getLogger(JdbcNativeExtractor.class);
+    /**
+     * The log.
+     */
+    private  static final Logger LOG = LoggerFactory.getLogger(JdbcNativeExtractor.class);
 
     /**
      * Jdbc Deep Job configuration.
@@ -64,6 +71,7 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
      */
     @Override
     public Partition[] getPartitions(S config) {
+        LOG.info("recovered partitions");
         jdbcDeepJobConfig = initConfig(config, jdbcDeepJobConfig);
 
         int upperBound = jdbcDeepJobConfig.getUpperBound();
@@ -71,13 +79,21 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
         int numPartitions = jdbcDeepJobConfig.getNumPartitions();
         int length = 1 + upperBound - lowerBound;
         Partition [] result = new Partition[numPartitions];
+        if (LOG.isDebugEnabled()){
+            LOG.debug(String.format("Creating JDBC Partition with options upperBound [%s], lowerBound:[%s], numPartitions: [%s], length [%s]",upperBound,lowerBound,numPartitions,length));
+        }
         for(int i=0; i<numPartitions; i++) {
             int start = lowerBound + lowerBound + ((i * length) / numPartitions);
             int end = lowerBound + (((i + 1) * length) / numPartitions) - 1;
             result[i] = new JdbcPartition(i, start, end);
+
+            if (LOG.isDebugEnabled()){
+                LOG.debug(String.format("new  JDBC Partition start [%s], end:[%s]",start,end));
+            }
         }
         return result;
     }
+
 
     /**
      * {@inheritDoc}
@@ -87,7 +103,9 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
         try {
             return jdbcReader.hasNext();
         } catch (SQLException e) {
-            throw new DeepGenericException(e);
+            String message = "A SQL Exception happens when we ask for nextElement."+e.toString();
+            LOG.error(message);
+            throw new DeepGenericException(message,e);
         }
     }
 
@@ -99,7 +117,9 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
         try {
             return transformElement(jdbcReader.next());
         } catch (SQLException e) {
-            throw new DeepGenericException(e);
+            String message = "A SQL Exception happens when we recover nextElement."+e.toString();
+            LOG.error(message);
+            throw new DeepGenericException(message,e);
         }
     }
 
@@ -108,13 +128,64 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
      */
     @Override
     public void close() {
-        if(jdbcReader != null) {
-            try {
-                jdbcReader.close();
-            } catch(Exception e) {
-                LOG.error("Unable to close jdbcReader", e);
-            }
+        closeJDBCReader();
+        closeJDBCWriter();
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initIterator(Partition dp, S config) {
+        jdbcDeepJobConfig = initConfig(config, jdbcDeepJobConfig);
+        jdbcReader = new JdbcReader(jdbcDeepJobConfig);
+        try {
+            jdbcReader.init(dp);
+        } catch(Exception e) {
+            String message = "Unable to initialize JdbcReader."+e.toString();
+            LOG.error(message);
+            throw new DeepGenericException(message, e);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void saveRDD(T t) {
+             this.jdbcWriter.save(transformElement(t));
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getPreferredLocations(Partition split) {
+        return Collections.EMPTY_LIST;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initSave(S config, T first, UpdateQueryBuilder queryBuilder) {
+
+        jdbcDeepJobConfig = initConfig(config, jdbcDeepJobConfig);
+        this.jdbcWriter = new JdbcWriter<>(jdbcDeepJobConfig);
+
+    }
+
+
+    protected abstract T transformElement(Map<String, Object> entity);
+
+    protected abstract Map<String, Object> transformElement(T entity);
+
+    /**
+     * Close the JDBCWritter.
+     */
+    private void closeJDBCWriter() {
         if(jdbcWriter != null) {
             try {
                 jdbcWriter.close();
@@ -125,56 +196,17 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
     }
 
     /**
-     * {@inheritDoc}
+     * Close the JDBCReader.
      */
-    @Override
-    public void initIterator(Partition dp, S config) {
-        jdbcDeepJobConfig = initConfig(config, jdbcDeepJobConfig);
-        this.jdbcReader = new JdbcReader(jdbcDeepJobConfig);
-        try {
-            this.jdbcReader.init(dp);
-        } catch(Exception e) {
-            throw new DeepGenericException("Unable to initialize JdbcReader", e);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void saveRDD(T t) {
-        try {
-            this.jdbcWriter.save(transformElement(t));
-        } catch(Exception e) {
-            throw new DeepGenericException("Error while writing row", e);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<String> getPreferredLocations(Partition split) {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initSave(S config, T first, UpdateQueryBuilder queryBuilder) {
-
-        jdbcDeepJobConfig = initConfig(config, jdbcDeepJobConfig);
-
-        try {
-            this.jdbcWriter = new JdbcWriter<>(jdbcDeepJobConfig);
-        } catch(Exception e) {
-            throw new DeepGenericException(e);
+    private void closeJDBCReader() {
+        if(jdbcReader != null) {
+            try {
+                jdbcReader.close();
+            } catch(Exception e) {
+                LOG.error("Unable to close jdbcReader", e);
+            }
         }
     }
 
 
-    protected abstract T transformElement(Map<String, Object> entity);
-
-    protected abstract Map<String, Object> transformElement(T entity);
 }

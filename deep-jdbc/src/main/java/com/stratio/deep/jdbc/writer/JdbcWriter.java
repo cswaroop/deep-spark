@@ -16,8 +16,11 @@
 
 package com.stratio.deep.jdbc.writer;
 
+import com.stratio.deep.commons.exception.DeepGenericException;
 import com.stratio.deep.jdbc.config.JdbcDeepJobConfig;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import scala.Tuple2;
 
 import java.sql.*;
@@ -32,6 +35,11 @@ public class JdbcWriter<T> implements IJdbcWriter {
      * JDBC Deep Job configuration.
      */
     private JdbcDeepJobConfig<T> jdbcDeepJobConfig;
+
+    /**
+     * The log.
+     */
+    private  static final Logger LOG = LoggerFactory.getLogger(JdbcWriter.class);
 
     /**
      * JDBC connection.
@@ -50,12 +58,20 @@ public class JdbcWriter<T> implements IJdbcWriter {
      * @param jdbcDeepJobConfig Deep Job configuration.
      * @throws Exception
      */
-    public JdbcWriter(JdbcDeepJobConfig jdbcDeepJobConfig) throws Exception {
-        this.jdbcDeepJobConfig = jdbcDeepJobConfig;
-        Class.forName(jdbcDeepJobConfig.getDriverClass());
-        this.conn = DriverManager.getConnection(jdbcDeepJobConfig.getConnectionUrl(),
-                jdbcDeepJobConfig.getUsername(),
-                jdbcDeepJobConfig.getPassword());
+    public JdbcWriter(JdbcDeepJobConfig jdbcDeepJobConfig) {
+
+        try {
+            this.jdbcDeepJobConfig = jdbcDeepJobConfig;
+            Class.forName(jdbcDeepJobConfig.getDriverClass());
+            this.conn = DriverManager.getConnection(jdbcDeepJobConfig.getConnectionUrl(),
+                    jdbcDeepJobConfig.getUsername(),
+                    jdbcDeepJobConfig.getPassword());
+        } catch (ClassNotFoundException | SQLException e) {
+            String message = "A exceptions happens while we create a JdbcWriter."+e.toString();
+            LOG.error(message);
+            throw new DeepGenericException(message,e);
+
+        }
     }
 
     /**
@@ -63,15 +79,22 @@ public class JdbcWriter<T> implements IJdbcWriter {
      * @param row Data structure representing a row as a Map of column_name:column_value
      * @throws SQLException
      */
-    public void save(Map<String, Object> row) throws Exception {
-        Tuple2<List<String>, String> data = sqlFromRow(row);
-        PreparedStatement statement = conn.prepareStatement(data._2());
-        int i = 1;
-        for(String columnName:data._1()) {
-            statement.setObject(i, row.get(columnName));
-            i++;
+    public void save(Map<String, Object> row)  {
+
+        try {
+            Tuple2<List<String>, String> data = sqlFromRow(row);
+            PreparedStatement statement = conn.prepareStatement(data._2());;
+            int i = 1;
+            for(String columnName:data._1()) {
+                statement.setObject(i, row.get(columnName));
+                i++;
+            }
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            String message = "A SQLException happens while we are saving a row in JDBCWritter."+e.getMessage();
+            LOG.error(message);
+            throw new DeepGenericException(message,e);
         }
-        statement.executeUpdate();
     }
 
     /**
