@@ -31,10 +31,14 @@ import com.stratio.deep.commons.filter.Filter;
 import com.stratio.deep.commons.filter.FilterType;
 import com.stratio.deep.jdbc.extractor.JdbcNativeCellExtractor;
 import com.stratio.deep.jdbc.extractor.JdbcNativeEntityExtractor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.*;
 
@@ -46,6 +50,15 @@ import static com.stratio.deep.commons.extractor.utils.ExtractorConstants.*;
 public class JdbcDeepJobConfig<T> extends DeepJobConfig<T, JdbcDeepJobConfig<T>>
         implements IJdbcDeepJobConfig<T, JdbcDeepJobConfig<T>>, Serializable{
 
+    /**
+     * The log.
+     */
+    private  static final Logger LOG = LoggerFactory.getLogger(JdbcDeepJobConfig.class);
+
+
+    /**
+     * The serialUID.
+     */
     private static final long serialVersionUID = -3772553194634727039L;
 
     /**
@@ -134,6 +147,7 @@ public class JdbcDeepJobConfig<T> extends DeepJobConfig<T, JdbcDeepJobConfig<T>>
      */
     @Override
     public JdbcDeepJobConfig<T> initialize() throws IllegalStateException {
+        LOG.info("Call to initialize without extractorConfig " );
         this.validate();
         return this;
     }
@@ -143,6 +157,19 @@ public class JdbcDeepJobConfig<T> extends DeepJobConfig<T, JdbcDeepJobConfig<T>>
      */
     @Override
     public JdbcDeepJobConfig<T> initialize(ExtractorConfig extractorConfig) {
+        LOG.info("Call to initialize with extractorConfig " );
+        if (LOG.isDebugEnabled()){
+            if (extractorConfig!=null && extractorConfig.getValues()!=null) {
+                Map<String, Serializable> values = extractorConfig.getValues();
+                StringBuilder message=new StringBuilder("Initialize extractorConfig  [");
+                for (Map.Entry<String, Serializable> entry : values.entrySet()){
+                    message.append("key").append(entry.getKey()).append("value").append(entry.getValue());
+
+                }
+                message.append("]");
+                LOG.debug(message.toString());
+            }
+        }
         Map<String, Serializable> values = extractorConfig.getValues();
         if (values.get(CATALOG) != null) {
             this.database(extractorConfig.getString(CATALOG));
@@ -227,8 +254,20 @@ public class JdbcDeepJobConfig<T> extends DeepJobConfig<T, JdbcDeepJobConfig<T>>
      */
     @Override
     public SelectQuery getQuery() {
+
         SelectQuery selectQuery = new SelectQuery();
+        if (LOG.isDebugEnabled()){
+            LOG.debug("Recovered query with dbtable.["+dbTable+"]");
+        }
         List<DbColumn> columns = dbTable.getColumns();
+        if (LOG.isDebugEnabled()){
+            if (columns!=null){
+                LOG.debug("Columns recovered. "+ Arrays.deepToString(columns.toArray())+"]");
+            }else{
+                LOG.debug("Columns is null");
+            }
+
+        }
         if(!columns.isEmpty()) {
             selectQuery.addColumns(columns.toArray(new Column[columns.size()]));
         } else {
@@ -286,6 +325,10 @@ public class JdbcDeepJobConfig<T> extends DeepJobConfig<T, JdbcDeepJobConfig<T>>
      */
     @Override
     public JdbcDeepJobConfig<T> database(String database) {
+        if (LOG.isDebugEnabled()){
+            LOG.debug(String.format("Create database database [%s] , dbSpec [%s]",database,dbSpec));
+        }
+
         this.catalog = database;
         dbSchema = new DbSchema(dbSpec, catalog);
         return this;
@@ -305,6 +348,9 @@ public class JdbcDeepJobConfig<T> extends DeepJobConfig<T, JdbcDeepJobConfig<T>>
     @Override
     public JdbcDeepJobConfig<T> table(String table) {
         this.table = table;
+        if (LOG.isDebugEnabled()){
+            LOG.debug("Trying to create a dbTable with dbShema ["+dbSchema+"]");
+        }
         if(dbSchema != null) {
             dbTable = new DbTable(dbSchema, table, table);
         }

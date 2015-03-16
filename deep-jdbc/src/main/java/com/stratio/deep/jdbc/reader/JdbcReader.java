@@ -80,18 +80,18 @@ public class JdbcReader implements IJdbcReader {
     /**
      * Initialized the reader
      * 
-     * @param p
+     * @param partirion
      *            Spark partition.
      * @throws Exception
      */
-    public void init(Partition p) throws Exception {
+    public void init(Partition partirion) throws Exception {
         Class.forName(jdbcDeepJobConfig.getDriverClass());
         conn = DriverManager.getConnection(jdbcDeepJobConfig.getConnectionUrl(),
                 jdbcDeepJobConfig.getUsername(),
                 jdbcDeepJobConfig.getPassword());
         Statement statement = conn.createStatement();
         SelectQuery query = jdbcDeepJobConfig.getQuery();
-        JdbcPartition jdbcPartition = (JdbcPartition)p;
+        JdbcPartition jdbcPartition = (JdbcPartition)partirion;
         if(jdbcDeepJobConfig.getNumPartitions() > 1) {
             Column partitionKey = jdbcDeepJobConfig.getPartitionKey();
             query.getWhereClause().addCondition(BinaryCondition.lessThan(partitionKey, jdbcPartition.upper(), true))

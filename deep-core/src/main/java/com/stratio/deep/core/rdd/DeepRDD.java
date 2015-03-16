@@ -35,6 +35,8 @@ import com.stratio.deep.commons.exception.DeepExtractorInitializationException;
 import com.stratio.deep.commons.exception.DeepIOException;
 import com.stratio.deep.commons.rdd.IExtractor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import scala.Function1;
 import scala.Unit;
 import scala.collection.Iterator;
@@ -47,6 +49,14 @@ import scala.runtime.AbstractFunction1;
  */
 public class DeepRDD<T, S extends BaseConfig> extends RDD<T> implements Serializable {
 
+    /**
+     * The log.
+     */
+    private  static final Logger LOG = LoggerFactory.getLogger(DeepRDD.class);
+
+    /**
+     * The serialUD.
+     */
     private static final long serialVersionUID = -5360986039609466526L;
 
     private transient IExtractor<T, S> extractorClient;
@@ -84,6 +94,14 @@ public class DeepRDD<T, S extends BaseConfig> extends RDD<T> implements Serializ
     public Iterator<T> compute(Partition split, TaskContext context) {
 
         initExtractorClient();
+
+    if (LOG.isDebugEnabled()){
+        LOG.debug(String.format("compute, init iterator with extractorClient [%s], split [%s], config [%s]",extractorClient,split,config));
+        if (config!=null){
+            LOG.debug("The config value is ["+config.getValue()+"]");
+        }
+
+    }
 
         extractorClient.initIterator(split, config.getValue());
 

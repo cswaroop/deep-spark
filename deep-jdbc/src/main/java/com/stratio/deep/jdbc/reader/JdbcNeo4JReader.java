@@ -45,7 +45,7 @@ public class JdbcNeo4JReader extends JdbcReader implements IJdbcReader {
      * {@inheritDoc}
      */
     @Override
-    public void init(Partition p) throws Exception {
+    public void init(Partition partirion) throws Exception {
         Class.forName(Driver.class.getCanonicalName());
         conn = DriverManager.getConnection(jdbcNeo4JDeepJobConfig.getConnectionUrl(),
                 jdbcNeo4JDeepJobConfig.getUsername(),

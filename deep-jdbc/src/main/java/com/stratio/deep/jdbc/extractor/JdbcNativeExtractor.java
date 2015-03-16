@@ -141,10 +141,15 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
         jdbcDeepJobConfig = initConfig(config, jdbcDeepJobConfig);
         jdbcReader = new JdbcReader(jdbcDeepJobConfig);
         try {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(String.format("Init iterator with jdbcReader: [%s] and partitions [%s]",jdbcReader,dp));
+            }
             jdbcReader.init(dp);
         } catch(Exception e) {
             String message = "Unable to initialize JdbcReader."+e.toString();
-            LOG.error(message);
+            LOG.error(message,e);
+            
+
             throw new DeepGenericException(message, e);
         }
     }

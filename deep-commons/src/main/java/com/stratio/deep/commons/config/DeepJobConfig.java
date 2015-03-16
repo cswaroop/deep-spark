@@ -34,6 +34,8 @@ import java.util.Map;
 
 import com.stratio.deep.commons.entity.Cells;
 import com.stratio.deep.commons.filter.Filter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by rcrespo on 13/10/14.
@@ -41,6 +43,11 @@ import com.stratio.deep.commons.filter.Filter;
  * @param <T> the type parameter
  */
 public class DeepJobConfig<T, S extends DeepJobConfig> extends BaseConfig<T, S> implements Serializable {
+
+    /**
+     * The log.
+     */
+    private  static final Logger LOG = LoggerFactory.getLogger(DeepJobConfig.class);
 
     /**
      * The Username.
@@ -189,13 +196,23 @@ public class DeepJobConfig<T, S extends DeepJobConfig> extends BaseConfig<T, S> 
      * @return the s
      */
     public S initialize(ExtractorConfig extractorConfig) {
-
+        LOG.info("call to generic initialize with extractConfig ["+extractorConfig+"]");
         setExtractorImplClassName(extractorConfig.getExtractorImplClassName());
         setEntityClass(extractorConfig.getEntityClass());
         setRddId(extractorConfig.getRddId());
         setPartitionId(extractorConfig.getPartitionId());
 
         Map<String, Serializable> values = extractorConfig.getValues();
+        if (LOG.isDebugEnabled()){
+            if (extractorConfig!=null && extractorConfig.getValues()!=null) {
+                StringBuilder message=new StringBuilder("Initialize extractorConfig  [");
+                for (Map.Entry<String, Serializable> entry : values.entrySet()){
+                    message.append("key").append(entry.getKey()).append("value").append(entry.getValue());
+
+                }
+                message.append("]");
+                LOG.debug(message.toString());
+            }
 
         if (values.get(USERNAME) != null) {
             username(extractorConfig.getString(USERNAME));
