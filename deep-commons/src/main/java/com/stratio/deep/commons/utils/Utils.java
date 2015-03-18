@@ -477,11 +477,15 @@ public final class Utils {
     }
 
     public static <S extends BaseConfig, W extends DeepJobConfig> W initConfig(S config, W deepJobConfig) {
+        LOG.info(String.format("Init config with config [%s] and deepJobConfig [%s]",config,deepJobConfig));
         if (config instanceof ExtractorConfig) {
+            LOG.debug("Config is an ExtractorConfig");
             deepJobConfig.initialize((ExtractorConfig) config);
         } else if (deepJobConfig.getClass().isAssignableFrom(config.getClass())) {
+            LOG.debug("config is assignable to a "+deepJobConfig.getClass());
             deepJobConfig = (W) ((W) config).initialize();
         } else {
+            LOG.debug("Default initConfig");
             deepJobConfig.initialize((DeepJobConfig) config);
         }
         return deepJobConfig;

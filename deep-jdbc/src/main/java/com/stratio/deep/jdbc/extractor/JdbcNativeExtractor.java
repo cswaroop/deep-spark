@@ -100,6 +100,7 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
      */
     @Override
     public boolean hasNext() {
+        LOG.debug("Has next?");
         try {
             return jdbcReader.hasNext();
         } catch (SQLException e) {
@@ -114,6 +115,7 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
      */
     @Override
     public T next() {
+        LOG.debug("Next");
         try {
             return transformElement(jdbcReader.next());
         } catch (SQLException e) {
@@ -128,6 +130,7 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
      */
     @Override
     public void close() {
+        LOG.debug("Close");
         closeJDBCReader();
         closeJDBCWriter();
     }
@@ -138,6 +141,7 @@ public abstract class JdbcNativeExtractor<T, S extends BaseConfig> implements IE
      */
     @Override
     public void initIterator(Partition dp, S config) {
+        LOG.info("Init iterator");
         jdbcDeepJobConfig = initConfig(config, jdbcDeepJobConfig);
         jdbcReader = new JdbcReader(jdbcDeepJobConfig);
         try {

@@ -203,16 +203,17 @@ public class DeepJobConfig<T, S extends DeepJobConfig> extends BaseConfig<T, S> 
         setPartitionId(extractorConfig.getPartitionId());
 
         Map<String, Serializable> values = extractorConfig.getValues();
-        if (LOG.isDebugEnabled()){
-            if (extractorConfig!=null && extractorConfig.getValues()!=null) {
-                StringBuilder message=new StringBuilder("Initialize extractorConfig  [");
-                for (Map.Entry<String, Serializable> entry : values.entrySet()){
+        if (LOG.isDebugEnabled()) {
+            if (extractorConfig != null && extractorConfig.getValues() != null) {
+                StringBuilder message = new StringBuilder("Initialize extractorConfig  [");
+                for (Map.Entry<String, Serializable> entry : values.entrySet()) {
                     message.append("key").append(entry.getKey()).append("value").append(entry.getValue());
 
                 }
                 message.append("]");
                 LOG.debug(message.toString());
             }
+        }
 
         if (values.get(USERNAME) != null) {
             username(extractorConfig.getString(USERNAME));
